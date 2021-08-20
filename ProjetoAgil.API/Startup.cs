@@ -30,6 +30,9 @@ namespace ProjetoAgil.API
             services.AddDbContext<DbContext>(
                 x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            
+            services.AddCors();
+            //services.AddCors();
 
              services.AddTransient<DataContext, DataContext>();
         }
@@ -43,7 +46,10 @@ namespace ProjetoAgil.API
             }
 
             //app.UseHttpsRedirection();
-
+            
+            //app.useCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHead());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            
             app.UseRouting();
 
             app.UseAuthorization();
